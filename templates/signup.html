@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% load bootstrap3 %}
+<div style="height: 100%;width: 100%;background-image:url('{% static 'images/back.jpg' %}');background-repeat: no-repeat;background-size: cover">
+<div class="container">
+		
+  <img src="{% static 'images/eatme.jpg' %}" alt="image1" height="90px" width="100px"  style="margin-left: 70%;margin-top: 2%" />
+ 
+</div>
+<h1 style="margin-left: 46%;font-weight: bolder;">SIGN UP</h1>
+
+<div class="container" style="height: 40%;width: 40%;align-self: center;" align="center" >
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input class = "btn btn-success" type="submit" value="Signup">
+  </form>
+</div>
+</div>
+{% endblock %}

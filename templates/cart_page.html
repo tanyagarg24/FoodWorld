@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+CART
+{% endblock %}
+
+{% block content %}
+
+
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/> -->
+
+
+{% if cartitems %}
+
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/> -->
+
+<div style="width:auto;background-color: white;" align="center">
+<div class="col-md-12" style="background-color:none;border-radius:25px">
+    <div style="margin-left:1000px;margin-top: 30px">
+  <img src="{% static 'images/eatme.jpg' %}" alt="image1" height="90px" width="100px" />
+   <img src="{% static 'images/offer.jpg' %}" alt="image1" height="90px" width="100px" />
+  </div>
+
+
+
+<div class="col-md-8" style="background-color:none;">
+<table class ="table" style = "width:80%; float:left;margin: auto;">
+  <thead>
+      <tr>
+      <th style="width:4%;font-size: 20px">Sr.No.</th>
+        <th style="width:20%;font-size: 20px;text-align: center;">DishView</th>
+
+              <th style="width:20%;font-size: 20px;text-align: center;" >DishName</th>
+              <th style="width:20%;font-size: 20px;text-align: center;">Price</th>
+              <th style="width:10%;font-size: 20px;text-align: center;">Quantity</th>
+              <th style="width:20%;font-size: 20px;text-align: center;">Subtotal</th>
+              <th style="width: 6%"></th>
+
+            </tr>
+</thead>
+{% for item in cartitems %}
+<tr>
+  <td  data-th="Sr.No." style="text-align: center;margin-top: 20px">{{forloop.counter}}</td>
+<td data-th="Dish View"><img width="90px" height="70px"src="media/{{item.individualItem.image}}"></td>
+<td data-th="Dish Name">
+                  <div class="col-sm-10">
+                    <h4 class="nomargin" style="text-align: center;">{{item.individualItem.name}}</h4>
+
+                  </div></td>
+              <td data-th="Price">
+                  <div class="col-sm-10">
+                    <h4 class="nomargin" style="text-align: center;">{{item.individualItem.price}}</h4>
+                  </div></td>
+              <td data-th="Quantity">
+                <h4 class="nomargin" style="text-align: center;"><a href="{% url 'minus' item.id %}"><span style = "margin-right:20px">-</span></a>{{item.quantity}}<a href="{% url 'add-to-cart' item.individualItem.id %}"><span style = "margin-left:20px">+</span></a></h4> </td>
+              <td data-th="Subtotal">
+             <div class="col-sm-10">
+                    <h4 class="nomargin" style="text-align: center;">{{item.subtotal}}</h4></div>
+              <td  class="actions" style="text-align: center;margin-top: 20px;cell">
+            <button style="margin-top: 13px"> <a id = "pr{{item.individualItem.id}}"  href='{% url "remove-from-cart" item.id %}'>
+              <span ><img src="{% static 'images/remove.jpg' %}" alt="image1" height="20px" width="20px"></span> </a></button></td>
+</tr>
+{% endfor %}
+
+
+
+
+<tfoot>
+            <tr class="visible-xs">
+
+            </tr>
+            <tr>
+
+              <td colspan="2"><a href="{% url 'homepage' %}" class="btn btn-danger">Continue Shopping</a></td>
+              <td colspan="2" class="hidden-xs"></td>
+              <td colspan="2" style="font-size:24px;font-weight: bolder;color: black;">Total: {{cart.total}}</td>
+
+            <td> <a href="{% url 'order' %}" class="btn btn-success btn-block" style="align-self: center;width: 150px">Order</a></td>
+           
+</tfoot>
+</table>
+
+</div>
+
+{% else %}
+<h1>Your cart is empty</h1>
+{% endif %}
+</div>
+</div>
+{% endblock %}

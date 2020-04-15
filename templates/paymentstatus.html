@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if response.RESPCODE == "01" %}
+<h1>Your payment for the your order {{response.ORDER_ID}} is successful</h1>
+<h2>Kindly wait for a few minutes </h2>
+
+<a class="btn btn-success" href="{% url 'homepage' %}">Try more items</a>
+<!-- <a class="btn btn-success" href="{% url 'review' %}">Feedback</a> -->
+
+{% else %}
+<h1>Payment failed</h1>
+{% endif %}
+{% endblock %}

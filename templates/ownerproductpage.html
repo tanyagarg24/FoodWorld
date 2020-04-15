@@ -1,0 +1,55 @@
+{% extends 'ownerbase.html' %} {% block content %}
+<div class="col-sm-8 col-sm-offset-2">
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th style="width:10%">Sr.No.</th>
+                <th style="width:20%">Item</th>
+                <th style="width:20%">Price</th>
+                <th style="width:10%">Qty</th>
+                <th style="width:20%">subtotal</th>
+                <th style="width:20%"></th>
+            </tr>
+        </thead>
+        <tr>
+            {% for item in particularorder.items.all %}
+            <td data-th="Sr.No." style="text-align: center;">{{forloop.counter}}</td>
+            <td data-th="Item" style="text-align: center;">{{item.individualItem.name}}</td>
+            <td data-th="Price" style="text-align: center;">{{item.individualItem.price}}</td>
+            <td data-th="Qty" style="text-align: center;">{{item.quantity}}</td>
+            <td data-th="subtotal" style="text-align: center;">{{item.subtotal}}</td>
+            <td></td>
+
+        </tr>
+        {% endfor %}
+        <tfoot>
+            <td style="font-size: 15px;font-weight: bolder;">GST
+                <br> CGST
+            </td>
+
+            <p style="font-size: 18px;font-weight: bolder;">Total: {{particularorder.total}}</p>
+
+            </td>
+            <td></td>
+
+        </tfoot>
+
+    </table>
+
+    <a href="{% url 'homepage' %}"><button>Back</button></a> {% if particularorder.delivered %}
+
+    <td> Delivered on : {{particularorder.delivered_time}} </td>
+
+    {% else %} {% if paid %}
+    <td> Payment : Already Paid </td>
+    {% else %}
+    <td> Payment : pending </td>
+    {% endif %}
+    <br>
+    <a href="{% url 'markdelivered' particularorder.orderid %}">
+        <button id="{{particularorder.orderid}}" class="btn btn-success">Mark delivered</button></a>
+
+    {% endif %} {% endblock %}
+</div>

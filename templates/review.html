@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+FeedBack
+{% endblock %}
+
+{% block content %}
+{% for item in order.items.all %}
+      <form class="" action="homepage" method="post">
+        <label for=""><img src="media/{{item.individualItem.image}}" alt=""></label>
+        <textarea name="text" rows="8" cols="80"></textarea>
+      </form>
+{% endfor %}
+{% endblock %}

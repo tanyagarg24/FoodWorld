@@ -1,0 +1,22 @@
+{% extends 'ownerbase.html' %} {% block content %} From
+
+<br>
+<form method="POST">{% csrf_token %}
+    <input type="date" name="min_date" id="myDate" value="{{todaysdate}}"><br><br> To
+    <br>
+    <input type="date" name="max_date" id="myDate" value="{{todaysdate}}">
+    <br>
+    <br><br>
+    <input value="View" type="submit" id="myBtn" data-toggle="modal" data-target="#view" class="btn btn-success btn-block" style="width: 150px">
+</form>
+
+{% if datewiseorder %}
+<ul>
+    {% for i in datewiseorder %}
+    <li>
+        <a href="{% url 'ownerproductpage' i.orderid %}">{{i.orderid}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<a href="{% url 'homepage' %}"><button>Back </button></a> {% endblock %}
